@@ -1,12 +1,26 @@
-import {loadImage} from './loaders.js';
-import SpriteSheet from "./SpriteSheet.js";
+import {loadImage, loadBuster} from './loaders.js';
+
 
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
 loadImage('img/sprites.png').then(image => {
-    const sprites = new SpriteSheet(image, 32, 32);
-    sprites.define('buster', 0, 0);
-    sprites.draw('buster', context, 150, 150);
+
+    const buster = loadBuster(image);
+
+    let deltaTime = 0;
+    let lastTime = 0;
+
+    function update(time) {
+        deltaTime = time - lastTime;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        buster.draw(context);
+        buster.update(deltaTime / 1000);
+        lastTime = time;
+        requestAnimationFrame(update);
+    }
+
+    update(0);
+
 });

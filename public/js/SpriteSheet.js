@@ -20,9 +20,13 @@ export default class SpriteSheet {
         this.sprites.set(name, buffer);
     }
 
-    draw(name, context, x, y) {
-        const buffer = this.sprites.get(name);
-        context.drawImage(buffer, x, y);
+    // draw(name, context, x, y) {
+    //
+    //     context.drawImage(name, x, y);
+    // }
+
+    get(name) {
+        return this.sprites.get(name);
     }
 
 }

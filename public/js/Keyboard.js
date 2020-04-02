@@ -22,17 +22,14 @@ export default class KeyboardState {
         event.preventDefault();
 
         const keyState = event.type === 'keydown' ? PRESSED : RELEASED;
-        // let keyState = event.type;
-        // if (keyState === 'keydown')
-        //     keyState = PRESSED;
-        // else keyState = RELEASE;
+
 
         if (this.keyStates.get(code) === keyState) {
             return;
         }
         this.keyStates.set(code, keyState);
         this.keyMap.get(code)(keyState);
-        console.log(this.keyStates);
+        console.log(code);
     }
 
     listenTo(window) {

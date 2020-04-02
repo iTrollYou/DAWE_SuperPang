@@ -24,8 +24,8 @@ export default class Player extends Object2D {
 
         // si buster está cayendo (está por debajo de la altura de la pantalla)
         // fuerza = añadir fuerza vertical de gravedad * tiempo
-        if (this.position.y < Settings.SCREEN_HEIGHT)
-            this.force.y += Settings.GRAVITY * time;
+        // if (this.position.y < Settings.SCREEN_HEIGHT)
+        //     this.force.y += Settings.GRAVITY * time;
 
         // position = añadir fuerza * tiempo al eje y
         this.position.y += this.force.y * time;
@@ -39,7 +39,7 @@ export default class Player extends Object2D {
             this.position.x = 0;
         // sino, si buster se sale por la derecha
         // position =  lo más a la derecha sin salirse , y
-        if (this.position.x > player.width - this.size.x ) //????????
+        if (this.position.x > player.width - this.size.x )
             this.position.x = player.width - this.size.x ;
 
         // si buster se sale por la parte inferior de la pantalla

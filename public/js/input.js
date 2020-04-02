@@ -1,5 +1,4 @@
 import Keyboard from "./Keyboard.js";
-import Settings from "./Settings.js";
 
 
 export function setupKeyboard(buster) {

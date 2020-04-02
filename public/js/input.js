@@ -26,6 +26,11 @@ export function setupKeyboard(buster) {
     input.addMapping('ArrowDown', keyState => {
         //console.log(keyState);
     });
+    input.addMapping('Space', keyState => {
+        if (keyState) {
+            buster.shoot();
+        }
+    });
 
     return input;
 }

@@ -11,6 +11,7 @@ export default class Player extends Object2D {
         this.spriteSheet = spriteSheet;
         this.direction = new Vec2D(0, 0);
         this.distance = 0;
+        this.hookManager = null;
     }
 
     routeFrame() {
@@ -73,4 +74,11 @@ export default class Player extends Object2D {
         context.drawImage(this.spriteSheet.get(this.routeFrame()), this.position.x, this.position.y);
     }
 
+    setHookManager(hookManager) {
+        this.hookManager = hookManager;
+    }
+
+    shoot() {
+        this.hookManager(this.position.x, Settings.SCREEN_HEIGHT);
+    }
 }

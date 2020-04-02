@@ -1,6 +1,7 @@
 import {loadImage, loadBuster, loadLevel, loadBalls, loadHookManager} from './loaders.js';
 import Settings from "./Settings.js";
 import {setupKeyboard} from "./input.js";
+import CollisionManager from "./collisions.js";
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -41,6 +42,10 @@ Promise.all([loadImage('img/sprites.png'), loadImage('img/hookRope.png'), loadLe
                 hook.draw(context);
                 hook.update(deltaTime / 1000)
             });
+            let check = new CollisionManager(balls, hooks);
+            check.checkCollisions();
+
+
             lastTime = time;
             requestAnimationFrame(update);
         }

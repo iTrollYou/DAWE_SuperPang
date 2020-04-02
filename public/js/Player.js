@@ -79,6 +79,6 @@ export default class Player extends Object2D {
     }
 
     shoot() {
-        this.hookManager(this.position.x, Settings.SCREEN_HEIGHT);
+        this.hookManager(this.position.x + this.size.x / 2, Settings.SCREEN_HEIGHT);
     }
 }

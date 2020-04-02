@@ -20,7 +20,7 @@ Promise.all([loadImage('img/sprites.png'), loadImage('img/hookRope.png'), loadLe
         const balls = loadBalls(levelSpec.balls);
 
         // cargar hooks
-        const hooks = [];
+        const hooks = new Set();
         const hookManager = loadHookManager(hookImage, hooks);
         buster.setHookManager(hookManager);
 

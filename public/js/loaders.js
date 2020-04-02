@@ -3,6 +3,7 @@ import Player from "./Player.js";
 import {Vec2D} from "./Vec2D.js";
 import {Ball} from "./Ball.js";
 import {Hook, HookType} from "./Hook.js";
+import Settings from "./Settings.js";
 
 
 export function loadLevel(currentLevel) {
@@ -36,11 +37,11 @@ export function loadBuster(image, playerSpec) {
 }
 
 export function loadBalls(ballSpec) {
-    let balls = [];
+    let balls = new Set();
     ballSpec.forEach(function (ball) {
         const pos = new Vec2D(ball.pos[0], ball.pos[1]);
         const force = new Vec2D(ball.force[0], ball.force[1]);
-        balls.push(new Ball(ball.radius, pos, force))
+        balls.add(new Ball(ball.radius, pos, force))
     });
     return balls;
 
@@ -49,9 +50,8 @@ export function loadBalls(ballSpec) {
 
 export function loadHookManager(hookImage, hooks) {
     return function hookManager(x, y) {
-        // const spriteSheet = new SpriteSheet(hookImage, 16, 16);
-        // spriteSheet.define('hook', 1, 0);
         const pos = new Vec2D(x, y);
-        hooks.push(new Hook(0, pos, HookType.rope, hookImage));
+        if (hooks.size < Settings.MAX_HOOKS)
+            hooks.add(new Hook(0, pos, HookType.rope, hookImage));
     }
 }

@@ -8,6 +8,7 @@ let HookType = {
 };
 
 class Hook extends Object2D {
+    to_kill = false;
 
     constructor(height, position, hook_type, buffer) {
         super(new Vec2D(6, height), position);
@@ -33,7 +34,7 @@ class Hook extends Object2D {
             this.timer -= time_passed;
         }
         if (this.timer < 0) {
-            //to_kill = true;
+            this.to_kill = true;
         }
 
         // si está en expansión y subiendo, incrementar tamaño y posición em increment unidades
@@ -48,7 +49,7 @@ class Hook extends Object2D {
         if (this.position.y <= 0) {
             this.expand = false;
             if (this.hook_type === HookType.rope && !this.expand) {
-                //to_kill = true;
+                this.to_kill = true;
             } else if (this.hook_type === HookType.chain) {
                 this.size.y = 0;
                 this.position.y = 0;

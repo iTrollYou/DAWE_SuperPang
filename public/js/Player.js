@@ -39,8 +39,8 @@ export default class Player extends Object2D {
             this.position.x = 0;
         // sino, si buster se sale por la derecha
         // position =  lo más a la derecha sin salirse , y
-        if (this.position.x > player.width - this.size.x - this.size.x - this.size.x) //????????
-            this.position.x = player.width - this.size.x - this.size.x - this.size.x;
+        if (this.position.x > player.width - this.size.x ) //????????
+            this.position.x = player.width - this.size.x ;
 
         // si buster se sale por la parte inferior de la pantalla
         // position = x, lo más abajo sin salirse

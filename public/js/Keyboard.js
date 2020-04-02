@@ -1,5 +1,5 @@
 const PRESSED = 1;
-const RELEASE = 0;
+const RELEASED = 0;
 export default class KeyboardState {
 
     constructor() {
@@ -21,7 +21,11 @@ export default class KeyboardState {
         }
         event.preventDefault();
 
-        const keyState = event.type === 'keydown' ? PRESSED : RELEASE;
+        const keyState = event.type === 'keydown' ? PRESSED : RELEASED;
+        // let keyState = event.type;
+        // if (keyState === 'keydown')
+        //     keyState = PRESSED;
+        // else keyState = RELEASE;
 
         if (this.keyStates.get(code) === keyState) {
             return;
@@ -31,7 +35,7 @@ export default class KeyboardState {
         console.log(this.keyStates);
     }
 
-    lisenTo(window) {
+    listenTo(window) {
         ['keydown', 'keyup'].forEach(eventName => {
             window.addEventListener(eventName, event => {
                 this.handleEvent(event);

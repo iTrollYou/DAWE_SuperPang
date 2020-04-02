@@ -21,13 +21,17 @@ loadImage('img/sprites.png').then(image => {
         requestAnimationFrame(update);
     }
 
-
+    // window.addEventListener('keydown', event => {
+    //     console.log(event)
+    // });
 
     const input = new Keyboard();
     input.addMapping('Space', keyState => {
-        console.log(keyState)
+        if (keyState) {
+            console.log(keyState)
+        }
     });
-    input.lisenTo(window);
+    input.listenTo(window);
 
     update(0);
 

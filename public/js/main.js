@@ -6,6 +6,8 @@ import {setupKeyboard} from "./input.js";
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
+export var TIMETMP = 0;
+
 Settings.SCREEN_HEIGHT = canvas.height;
 Settings.SCREEN_WIDTH = canvas.width;
 
@@ -19,6 +21,7 @@ loadImage('img/sprites.png').then(image => {
 
     function update(time) {
         deltaTime = time - lastTime;
+        TIMETMP = deltaTime / 100;
         context.clearRect(0, 0, canvas.width, canvas.height);
         // pintar contorno
         context.strokeRect(0, 0, canvas.width, canvas.height);

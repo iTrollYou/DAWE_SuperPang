@@ -28,10 +28,10 @@ export default class Player extends Object2D {
         //     this.force.y += Settings.GRAVITY * time;
 
         // position = añadir fuerza * tiempo al eje y
-        this.position.y += this.force.y * time;
+        //  this.position.y += this.force.y * time;
 
         // position = añadir dirección * tiempo * velocidad del jugador al eje x
-        this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
+        // this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
 
         // si buster se sale por la izquierda de la pantalla
         // position = 0,y
@@ -39,17 +39,24 @@ export default class Player extends Object2D {
             this.position.x = 0;
         // sino, si buster se sale por la derecha
         // position =  lo más a la derecha sin salirse , y
-        if (this.position.x > player.width - this.size.x )
-            this.position.x = player.width - this.size.x ;
+        if (this.position.x > player.width - this.size.x)
+            this.position.x = player.width - this.size.x;
 
         // si buster se sale por la parte inferior de la pantalla
         // position = x, lo más abajo sin salirse
         if (this.position.y >= player.height - this.size.y)
             this.position.y = player.height - this.size.y;
+
+        function moveRight() {
+            this.direction.x = 1;
+            this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
+        }
+
+
     }
 
     draw(context) {
         context.drawImage(this.sprite.get('buster'), this.position.x, this.position.y);
-
     }
+
 }

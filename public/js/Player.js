@@ -1,17 +1,36 @@
 import {Object2D, Vec2D} from "./math.js";
 import Settings from "./Settings.js";
 
+const frames = ['buster', 'buster-1', 'buster-2'];
+
 export default class Player extends Object2D {
 
-    constructor(size, pos, sprite) {
+    constructor(size, pos, spriteSheet) {
         super(size, pos);
         this.force = new Vec2D(0, 0);
-        this.sprite = sprite;
-        this.direction = new Vec2D(1, 0);
+        this.spriteSheet = spriteSheet;
+        this.direction = new Vec2D(0, 0);
+        this.distance = 0;
+    }
+
+    routeFrame() {
+        if (this.direction.x !== 0) {
+            const frameIndex = Math.floor(this.distance / 10) % frames.length;
+            const frameName = frames[frameIndex];
+            return frameName;
+        }
+
+        return 'buster';
     }
 
     // time respresenta el tiempo que ha pasado desde la última ejecución
     update(time) {
+        if (this.direction.x !== 0) {
+            this.distance += Settings.PLAYER_SPEED * time;
+        } else {
+            this.distance = 0;
+        }
+
 
         /*
         Asume por el momento que Settings.SCREEN_HEIGHT y Settings.SCREEN_WIDTH indican el tamaño de
@@ -24,14 +43,14 @@ export default class Player extends Object2D {
 
         // si buster está cayendo (está por debajo de la altura de la pantalla)
         // fuerza = añadir fuerza vertical de gravedad * tiempo
-        // if (this.position.y < Settings.SCREEN_HEIGHT)
-        //     this.force.y += Settings.GRAVITY * time;
+        if (this.position.y < Settings.SCREEN_HEIGHT)
+            this.force.y += Settings.GRAVITY * time;
 
         // position = añadir fuerza * tiempo al eje y
-        //  this.position.y += this.force.y * time;
+        this.position.y += this.force.y * time;
 
         // position = añadir dirección * tiempo * velocidad del jugador al eje x
-        // this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
+        this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
 
         // si buster se sale por la izquierda de la pantalla
         // position = 0,y
@@ -47,16 +66,11 @@ export default class Player extends Object2D {
         if (this.position.y >= player.height - this.size.y)
             this.position.y = player.height - this.size.y;
 
-        function moveRight() {
-            this.direction.x = 1;
-            this.position.x += this.direction.x * time * Settings.PLAYER_SPEED;
-        }
-
 
     }
 
     draw(context) {
-        context.drawImage(this.sprite.get('buster'), this.position.x, this.position.y);
+        context.drawImage(this.spriteSheet.get(this.routeFrame()), this.position.x, this.position.y);
     }
 
 }

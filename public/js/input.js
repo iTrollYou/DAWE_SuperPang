@@ -1,18 +1,25 @@
 import Keyboard from "./Keyboard.js";
 import Settings from "./Settings.js";
-import {TIMETMP} from "./main.js";
 
 
 export function setupKeyboard(buster) {
     const input = new Keyboard();
 
     input.addMapping('ArrowRight', keyState => {
-        buster.direction.x = 1;
-        buster.position.x += buster.direction.x * TIMETMP * Settings.PLAYER_SPEED;
+        if (keyState) {
+            buster.direction.x = 1;
+        } else {
+            buster.direction.x = 0;
+        }
+
+
     });
     input.addMapping('ArrowLeft', keyState => {
-        buster.direction.x = -1;
-        buster.position.x += buster.direction.x * TIMETMP * Settings.PLAYER_SPEED;
+        if (keyState) {
+            buster.direction.x = -1;
+        } else {
+            buster.direction.x = 0;
+        }
     });
     input.addMapping('ArrowUp', keyState => {
         //console.log(keyState);

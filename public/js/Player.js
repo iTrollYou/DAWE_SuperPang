@@ -32,7 +32,6 @@ export default class Player extends Object2D {
             this.distance = 0;
         }
 
-
         /*
         Asume por el momento que Settings.SCREEN_HEIGHT y Settings.SCREEN_WIDTH indican el tamaño de
         la pantalla del juego. Settings tiene otras constantes definidas (échales un vistazo)

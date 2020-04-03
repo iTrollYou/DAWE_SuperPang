@@ -1,4 +1,4 @@
-import {loadImage, loadBuster, loadLevel, loadBalls, loadHookManager} from './loaders.js';
+import {loadImage, loadBuster, loadLevel, loadBalls, loadHookManager, loadBackground} from './loaders.js';
 import Settings from "./Settings.js";
 import {setupKeyboard} from "./input.js";
 import CollisionManager from "./collisions.js";
@@ -11,8 +11,12 @@ Settings.SCREEN_HEIGHT = canvas.height;
 Settings.SCREEN_WIDTH = canvas.width;
 
 
-Promise.all([loadImage('img/sprites.png'), loadImage('img/hookRope.png'), loadLevel('1')])
-    .then(([sprites, hookImage, levelSpec]) => {
+Promise.all([loadImage('img/sprites.png'), loadImage('img/hookRope.png'),
+    loadImage('img/backgrounds.png'), loadLevel('1')])
+    .then(([sprites, hookImage, backgroundImage, levelSpec]) => {
+        // background
+        const drawBackground = loadBackground(backgroundImage);
+
         // cargar buster
         const buster = loadBuster(sprites, levelSpec.player);
 
@@ -29,7 +33,9 @@ Promise.all([loadImage('img/sprites.png'), loadImage('img/hookRope.png'), loadLe
 
         function update(time) {
             deltaTime = time - lastTime;
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            // dibujar background
+            drawBackground(context);
+
             // pintar contorno
             context.strokeRect(0, 0, canvas.width, canvas.height);
             buster.draw(context);

@@ -42,7 +42,7 @@ export class Vec2D {
 
     equals(other) {
         // devuelve true si this es aproximadamente igual a other
-        // (igual con una diferencia máxima de epsilon=0.1
+        // (igual con una diferencia máxima de epsilon = 0.1
         return (Vec2D.approx_equal(this, other, 0.1))
     }
 

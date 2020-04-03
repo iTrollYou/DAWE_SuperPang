@@ -26,6 +26,7 @@ export function loadImage(url) {
 
 export function loadBuster(image, playerSpec) {
     const spriteSheet = new SpriteSheet(image, 32, 32);
+    spriteSheet.define('idle', 1, 1); // xd
     spriteSheet.define('buster', 1, 0);
     spriteSheet.define('buster-1', 2, 0);
     spriteSheet.define('buster-2', 3, 0);

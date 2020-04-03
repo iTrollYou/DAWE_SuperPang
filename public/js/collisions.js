@@ -20,7 +20,7 @@ export default class CollisionManager {
                 if (collision instanceof Vec2D) {
                     this.balls.delete(ball);
                     this.hooks.delete(hook);
-                    this.split_ball(ball)
+                    this.split_ball(ball, hook)
                 }
             });
         });
@@ -31,6 +31,7 @@ export default class CollisionManager {
         if (ball.radius > Settings.MIN_BALL_RADIUS) {
             const forceLeft = new Vec2D(ball.force.x * -1, ball.force.y);
             const forceRight = new Vec2D(ball.force.x * 1, ball.force.y);
+
             this.balls.add(new Ball(ball.radius / 2, ball.pos, forceLeft));
             this.balls.add(new Ball(ball.radius / 2, ball.pos, forceRight));
         }

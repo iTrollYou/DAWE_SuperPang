@@ -1,7 +1,7 @@
 import {Object2D, Vec2D} from "./math.js";
 import Settings from "./Settings.js";
 
-const frames = ['buster', 'buster-1', 'buster-2'];
+const frames = ['idle', 'buster', 'buster-1', 'buster-2'];
 
 export default class Player extends Object2D {
 
@@ -21,7 +21,7 @@ export default class Player extends Object2D {
             return frameName;
         }
 
-        return 'buster';
+        return 'idle';
     }
 
     // time respresenta el tiempo que ha pasado desde la última ejecución

@@ -45,7 +45,7 @@ class Ball extends Object2D {
     draw(ctx) {
         // Añade el métododrawa la clase Ball para que se pinte a sí misma en el contexto que se le pasa como parámetro
         ctx.beginPath();
-        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI, false);
         ctx.fillStyle = "green";
         ctx.fill();
         ctx.stroke();

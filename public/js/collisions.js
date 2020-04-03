@@ -18,19 +18,19 @@ export default class CollisionManager {
             this.balls.forEach(ball => {
                 let collision = ball_to_box(ball, hook, true);
                 if (collision instanceof Vec2D) {
-                    this.split_ball(ball, hook)
+                    this.balls.delete(ball);
+                    this.hooks.delete(hook);
+                    this.split_ball(ball)
                 }
             });
         });
 
     }
 
-    split_ball(ball, hook) {
+    split_ball(ball) {
         if (ball.radius > Settings.MIN_BALL_RADIUS) {
             const forceLeft = new Vec2D(ball.force.x * -1, ball.force.y);
             const forceRight = new Vec2D(ball.force.x * 1, ball.force.y);
-            this.balls.delete(ball);
-            this.hooks.delete(hook);
             this.balls.add(new Ball(ball.radius / 2, ball.pos, forceLeft));
             this.balls.add(new Ball(ball.radius / 2, ball.pos, forceRight));
         }

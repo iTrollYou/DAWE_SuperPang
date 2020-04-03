@@ -70,7 +70,7 @@ export default class Player extends Object2D {
     }
 
     draw(context) {
-        context.drawImage(this.spriteSheet.get(this.routeFrame()), this.position.x, this.position.y);
+        context.drawImage(this.spriteSheet.get(this.routeFrame()), this.position.x, this.position.y - Settings.MARGIN);
     }
 
     setHookManager(hookManager) {

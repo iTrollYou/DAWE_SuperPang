@@ -9,11 +9,9 @@ class Ball extends Object2D {
         this.radius = radius;
         this.position = position;
         this.force = force;
-        //  this.falling = this.force.y >= 0;
-        // this.max_height = Settings.SCREEN_HEIGHT - 150 - radius * 4;
 
 
-        this.gravity = 0.2;
+        this.gravity = 0.4;
     }
 
     get pos() {
@@ -25,7 +23,6 @@ class Ball extends Object2D {
     }
 
     update(time_passed) {
-
         if (this.x < this.radius || this.x > Settings.SCREEN_WIDTH - this.radius) {
             this.force = new Vec2D(-this.force.x, this.force.y);
             if (this.x < this.radius)
@@ -33,15 +30,16 @@ class Ball extends Object2D {
             else
                 this.position = new Vec2D(2 * (Settings.SCREEN_WIDTH - this.radius) - this.x, this.y);
         }
-        if (this.y > Settings.SCREEN_HEIGHT - this.radius) {
+        if (this.y + this.radius >= Settings.SCREEN_HEIGHT) {
             this.position = new Vec2D(this.x, 2 * (Settings.SCREEN_HEIGHT - this.radius) - this.y);
+            this.force = new Vec2D(this.force.x, -this.force.y);
+        } else if (this.y - this.radius <= 0) {
+            this.position = new Vec2D(this.x, 2 * (this.radius) - this.y);
             this.force = new Vec2D(this.force.x, -this.force.y);
         }
 
-        this.force.y += this.gravity; // <--- this is it
-
+        this.force.add(new Vec2D(0, this.gravity)); // <--- this is it
         this.position.add(this.force);
-
     }
 
     draw(ctx) {
